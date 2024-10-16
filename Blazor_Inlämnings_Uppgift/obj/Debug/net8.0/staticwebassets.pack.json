@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\alitl\\TestMySelf\\Blazor_Inlämnings_Uppgift\\Blazor_Inlämnings_Uppgift\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Blazor_Inlämnings_Uppgift.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Blazor_Inlämnings_Uppgift.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\alitl\\TestMySelf\\Blazor_Inlämnings_Uppgift\\Blazor_Inlämnings_Uppgift\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\alitl\\TestMySelf\\Blazor_Inlämnings_Uppgift\\Blazor_Inlämnings_Uppgift\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\alitl\\TestMySelf\\Blazor_Inlämnings_Uppgift\\Blazor_Inlämnings_Uppgift\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\alitl\\TestMySelf\\Blazor_Inlämnings_Uppgift\\Blazor_Inlämnings_Uppgift\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Blazor_Inlämnings_Uppgift.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Blazor_Inlämnings_Uppgift.props",
+      "PackagePath": "build\\Blazor_Inlämnings_Uppgift.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Blazor_Inlämnings_Uppgift.props",
+      "PackagePath": "buildMultiTargeting\\Blazor_Inlämnings_Uppgift.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Blazor_Inlämnings_Uppgift.props",
+      "PackagePath": "buildTransitive\\Blazor_Inlämnings_Uppgift.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

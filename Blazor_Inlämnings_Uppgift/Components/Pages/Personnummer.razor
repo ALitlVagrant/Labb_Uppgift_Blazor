@@ -1,0 +1,71 @@
+﻿@page "/Personnummer"
+@using Luhn_SSN
+@rendermode InteractiveServer
+<h1>Personnummer Verifiering</h1>
+
+
+<input @bind="SSNInput" placeholder="Personnummer med (10 siffror)"/>
+<input @bind="FirstName" placeholder="Förnamn"/>
+<input @bind="LastName" placeholder="Efternamn"/>
+
+<button @onclick="SubmitHandler">Submit</button>
+
+@if (!string.IsNullOrEmpty(ErrorMsg))
+{
+    <p style="color:red;">@ErrorMsg</p>
+}
+@if (!string.IsNullOrEmpty(SuccessMsg))
+{
+<p style="color: green;">@SuccessMsg</p>
+}
+
+
+@code
+{
+    string SuccessMsg;
+
+    string ErrorMsg;
+    //regex pattern
+    string pattern = @"^\d{6}\d{4}$";
+
+    string SSNInput;
+    string FirstName;
+    string LastName;
+    string ResultMessage;
+
+    private void SubmitHandler()
+    {
+        ErrorMsg = string.Empty; // Återställer felmeddelandet
+        SuccessMsg = string.Empty; // Återställer framgångsmeddelandet
+        
+        //Kollar så personnummret är 10 siffor 
+        if (!System.Text.RegularExpressions.Regex.IsMatch(SSNInput, pattern))
+        {
+            ErrorMsg = "Personnummret måste vara exakt 10 siffror!";
+            return;
+        }
+        
+        //skapar upp nytt objekt av klassen Person och tilldelar variablerna det användaren angett
+        var person = new Person(FirstName, LastName, SSNInput);
+        
+        //metoden IsValidSsn använder luhn algoritm för att kolla om det är ett godkänt personnummer
+        if (person.IsValidSsn())
+        {
+            //kollar siffran innan kontrollsiffra för att se om det är udda eller jämnt för att avgöra biologiskt kön
+            person.GenderCheck();
+
+            SuccessMsg = $"{person.GetFullName()} har ett giltigt Personnummer och är en {person.GetGender()}";
+        }
+        else
+        {
+            ErrorMsg = $"{person.GetFullName()} har inte ett giltigt personnummer!";
+        }
+    }
+    
+    
+
+
+
+
+
+}

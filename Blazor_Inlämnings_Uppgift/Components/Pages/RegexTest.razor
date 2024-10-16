@@ -1,0 +1,31 @@
+﻿@page "/RegexTest"
+@using System.Text.RegularExpressions
+@rendermode InteractiveServer
+<h3>RegexTest</h3>
+
+<input @bind = "emailInput"/>
+<button @onclick = "EmailChecker">Check Email</button>
+
+<p>@emailValidationMsg</p>
+
+@code 
+{
+    //checking for basic structure of email address
+    string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+    string emailInput;
+    string emailValidationMsg;
+
+
+    public void EmailChecker()
+    {
+        if (Regex.IsMatch(emailInput,emailPattern))
+        {
+            emailValidationMsg = "Valid Email";
+
+        }
+        else
+        {
+            emailValidationMsg = "Invalid Email";
+        }
+    }
+}
