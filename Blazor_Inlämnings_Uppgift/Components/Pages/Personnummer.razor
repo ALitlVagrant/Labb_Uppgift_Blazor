@@ -1,14 +1,18 @@
 ﻿@page "/Personnummer"
-@using Luhn_SSN
+@using System.Text.Json
+@using Blazor_Inlämnings_Uppgift
 @rendermode InteractiveServer
+
 <h1>Personnummer Verifiering</h1>
 
 
-<input @bind="SSNInput" placeholder="Personnummer med (10 siffror)"/>
-<input @bind="FirstName" placeholder="Förnamn"/>
-<input @bind="LastName" placeholder="Efternamn"/>
+<input @bind="SSNInput" placeholder="Personnummer (10 siffror)" style="margin: 10px 0; width: 250px;"/>
+<input @bind="FirstName" placeholder="Förnamn" style="margin: 10px 0; width: 250px;"/>
+<input @bind="LastName" placeholder="Efternamn" style="margin: 10px 0; width: 250px;"/>
+<button @onclick="SubmitHandler" style="margin-top: 10px;">Submit</button>
 
-<button @onclick="SubmitHandler">Submit</button>
+<button @onclick="SaveAllUserDataToText" style="margin-top: 10px;">Spara Användardata</button>
+
 
 @if (!string.IsNullOrEmpty(ErrorMsg))
 {
@@ -20,39 +24,87 @@
 }
 
 
+
+
+<h2>Tillagda personer:</h2>
+@if (_people != null && _people.Any())
+{
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 8px;">Namn</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Personnummer</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Kön</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var person in _people)
+        {
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">@person.GetFullName()</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">@person.Ssn</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">@person.GetGender()</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Inga personer hittades.</p>
+}
+
+
+
 @code
 {
+    public List<Person> _people = new();
+    
+    
     string SuccessMsg;
-
     string ErrorMsg;
-    //regex pattern
-    string pattern = @"^\d{6}\d{4}$";
-
+    //regex _pattern
+    string _pattern = @"^\d{10}$";
     string SSNInput;
     string FirstName;
     string LastName;
-    string ResultMessage;
 
-    private void SubmitHandler()
+
+    private async Task SubmitHandler()
     {
-        ErrorMsg = string.Empty; // Återställer felmeddelandet
-        SuccessMsg = string.Empty; // Återställer framgångsmeddelandet
+        ErrorMsg = string.Empty;
+        SuccessMsg = string.Empty;
+        
+        
+        if (string.IsNullOrWhiteSpace(FirstName))
+        {
+            ErrorMsg = "Förnamn får inte vara tomt";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(LastName))
+        {
+            ErrorMsg = "Efternamn får inte vara tomt";
+            return;
+        }
         
         //Kollar så personnummret är 10 siffor 
-        if (!System.Text.RegularExpressions.Regex.IsMatch(SSNInput, pattern))
+        if (!System.Text.RegularExpressions.Regex.IsMatch(SSNInput, _pattern))
         {
             ErrorMsg = "Personnummret måste vara exakt 10 siffror!";
             return;
         }
         
-        //skapar upp nytt objekt av klassen Person och tilldelar variablerna det användaren angett
+        //skapar upp nytt objekt av klassen Person och tilldelar variablerna det användaren angivit med userinput 
         var person = new Person(FirstName, LastName, SSNInput);
-        
+
         //metoden IsValidSsn använder luhn algoritm för att kolla om det är ett godkänt personnummer
         if (person.IsValidSsn())
         {
             //kollar siffran innan kontrollsiffra för att se om det är udda eller jämnt för att avgöra biologiskt kön
             person.GenderCheck();
+            
+            _people.Add(person);
 
             SuccessMsg = $"{person.GetFullName()} har ett giltigt Personnummer och är en {person.GetGender()}";
         }
@@ -60,7 +112,28 @@
         {
             ErrorMsg = $"{person.GetFullName()} har inte ett giltigt personnummer!";
         }
+
+
+        
     }
+    private void SaveUserDataToTxt(Person person)
+    {
+        var personData = $"{person.FirstName}; {person.LastName}; {person.Gender}";
+        var filePath = "personData.txt";
+        File.AppendAllText(filePath, personData + Environment.NewLine);
+    }
+
+    private void SaveAllUserDataToText()
+    {
+        foreach (var person in _people)
+        {
+            SaveUserDataToTxt(person);
+        }
+
+        SuccessMsg = "Successfully saved all userdata!";
+    }
+
+    
     
     
 

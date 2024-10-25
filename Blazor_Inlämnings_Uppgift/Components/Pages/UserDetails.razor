@@ -1,0 +1,58 @@
+﻿@page "/UserDetails"
+@using System.Text.Json
+@using Blazor_Inlämnings_Uppgift
+@rendermode InteractiveServer
+<h3>UserDetails</h3>
+
+
+@if (_people != null && _people.Any())
+{
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+    <tr>
+        <th style="border: 1px solid #ddd; padding: 8px;">Namn</th>
+        <th style="border: 1px solid #ddd; padding: 8px;">Personnummer</th>
+        <th style="border: 1px solid #ddd; padding: 8px;">Kön</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var person in _people)
+    {
+    <tr>
+        <td style="border: 1px solid #ddd; padding: 8px;">@person.GetFullName()</td>
+        <td style="border: 1px solid #ddd; padding: 8px;">@person.Ssn</td>
+        <td style="border: 1px solid #ddd; padding: 8px;">@person.GetGender()</td>
+    </tr>
+    }
+    </tbody>
+</table>
+}
+else
+{
+<p>Inga personer hittades.</p>
+}
+
+
+@code 
+{
+    private List<Person> _people = new List<Person>();
+
+    protected override void OnInitialized()
+    {
+        // Lägg till instanser av Person i listan för demonstration
+        _people.Add(new Person("Anna", "Andersson", "9001011234"));
+        _people.Add(new Person("Erik", "Svensson", "8505032345"));
+        _people.Add(new Person("Lisa", "Berg", "9207114567"));
+        _people.Add(new Person("Johan", "Karlsson", "7802045678"));
+        _people.Add(new Person("Maria", "Eriksson", "9108126789"));
+
+        // Anropa GenderCheck för varje person
+        foreach (var person in _people)
+        {
+            person.GenderCheck(); // Kolla kön för varje person
+        }
+    }
+    
+    
+
+}

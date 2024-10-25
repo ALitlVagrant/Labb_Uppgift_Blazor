@@ -3,7 +3,7 @@
 @rendermode InteractiveServer
 <h3>RegexTest</h3>
 
-<input @bind = "emailInput"/>
+<input @bind = "emailInput" placeholder="Ange Email"/>
 <button @onclick = "EmailChecker">Check Email</button>
 
 <p>@emailValidationMsg</p>
@@ -11,14 +11,14 @@
 @code 
 {
     //checking for basic structure of email address
-    string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+    string email_pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
     string emailInput;
     string emailValidationMsg;
 
 
     public void EmailChecker()
     {
-        if (Regex.IsMatch(emailInput,emailPattern))
+        if (Regex.IsMatch(emailInput,email_pattern))
         {
             emailValidationMsg = "Valid Email";
 

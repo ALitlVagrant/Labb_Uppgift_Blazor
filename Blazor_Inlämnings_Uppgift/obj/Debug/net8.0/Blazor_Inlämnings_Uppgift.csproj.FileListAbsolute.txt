@@ -27,3 +27,4 @@ C:\Users\alitl\TestMySelf\Blazor_Inlämnings_Uppgift\Blazor_Inlämnings_Uppgift\
 C:\Users\alitl\TestMySelf\Blazor_Inlämnings_Uppgift\Blazor_Inlämnings_Uppgift\obj\Debug\net8.0\Blazor_Inlämnings_Uppgift.pdb
 C:\Users\alitl\TestMySelf\Blazor_Inlämnings_Uppgift\Blazor_Inlämnings_Uppgift\obj\Debug\net8.0\Blazor_Inlämnings_Uppgift.genruntimeconfig.cache
 C:\Users\alitl\TestMySelf\Blazor_Inlämnings_Uppgift\Blazor_Inlämnings_Uppgift\obj\Debug\net8.0\ref\Blazor_Inlämnings_Uppgift.dll
+C:\Users\alitl\TestMySelf\Blazor_Inlämnings_Uppgift\Blazor_Inlämnings_Uppgift\obj\Debug\net8.0\Blazor_Inlämnings_Uppgift.sourcelink.json
